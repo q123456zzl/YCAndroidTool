@@ -122,12 +122,23 @@
                     style="@style/DetailContent"/>
 
                 <TextView
+                    android:id="@+id/tv_request_body_title"
+                    style="@style/DetailTitle"
+                    android:text="Request"/>
+
+                <TextView
+                    android:id="@+id/tv_request_body"
+                    android:textColor="#4dac41"
+                    android:background="@drawable/shape_response"
+                    style="@style/DetailContent"/>
+
+                <TextView
                     style="@style/DetailTitle"
                     android:text="Response Headers"/>
 
                 <TextView
                     android:id="@+id/tv_response_headers"
-                    android:textColor="#257ada"
+                    android:textColor="#ff3f00"
                     android:background="@drawable/shape_response_headers"
                     style="@style/DetailContent"/>
 
@@ -153,10 +164,10 @@
             android:layout_alignParentRight="true"
             android:layout_margin="20dp"
             android:background="@android:drawable/dialog_holo_light_frame"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:visibility="gone" />
 
-        <include layout="@layout/layout_progress_loading" />
+        <include layout="@layout/layout_progress_loading"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

@@ -2,7 +2,6 @@ package com.yc.netlib.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,11 +40,6 @@ public class NetworkFeedAdapter extends BaseRecycleAdapter<NetworkFeedBean> {
             @Override
             public void run() {
                 int lineCount = mUrlTextView.getLineCount();
-                if (lineCount>2){
-                    mUrlTextView.setLines(2);
-                    mUrlTextView.setMaxLines(2);
-                    mUrlTextView.setEllipsize(TextUtils.TruncateAt.END);
-                }
             }
         });
         if (networkFeedModel.getStatus() >= 400 && networkFeedModel.getStatus() <= 600) {

@@ -22,6 +22,8 @@ public class NetworkFeedBean implements Serializable {
 
     private Map<String, String> mRequestHeadersMap;
 
+    private String requestBody;
+
     private String mName;
     private int mStatus;
     private int mSize;
@@ -75,6 +77,14 @@ public class NetworkFeedBean implements Serializable {
 
     public void setRequestHeadersMap(Map<String, String> requestHeadersMap) {
         mRequestHeadersMap = requestHeadersMap;
+    }
+
+    public String getRequestBody() {
+        return requestBody;
+    }
+
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
     }
 
     public String getName() {

@@ -52,6 +52,16 @@ public class DataTranslator {
             headersMap.put(name, value);
         }
         networkFeedModel.setRequestHeadersMap(headersMap);
+        try {
+            byte[] body = request.body();
+            if (body != null && body.length != 0) {
+                String requestBody = new String(body);
+                networkFeedModel.setRequestBody(requestBody);
+            }
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
         createRecord(requestId, request);
     }
 

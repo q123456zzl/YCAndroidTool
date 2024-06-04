@@ -25,6 +25,7 @@
         <item name="android:textColor">@color/dark_gray</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:padding">10dp</item>
+        <item name="android:textIsSelectable">true</item>
     </style>
 
 

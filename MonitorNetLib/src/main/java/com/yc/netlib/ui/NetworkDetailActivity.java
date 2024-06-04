@@ -48,6 +48,8 @@ public class NetworkDetailActivity extends AppCompatActivity {
     private TextView mTvScreenshot;
     private TextView mTvUrlContent;
     private TextView mTvRequestHeaders;
+    private TextView mTvRequestBodyTitle;
+    private TextView mTvRequestBody;
     private TextView mTvResponseHeaders;
     private TextView mTvBody;
     private NestedScrollView mScrollView;
@@ -85,6 +87,8 @@ public class NetworkDetailActivity extends AppCompatActivity {
         mTvScreenshot = findViewById(R.id.tv_screenshot);
         mTvUrlContent = findViewById(R.id.tv_url_content);
         mTvRequestHeaders = findViewById(R.id.tv_request_headers);
+        mTvRequestBodyTitle = findViewById(R.id.tv_request_body_title);
+        mTvRequestBody = findViewById(R.id.tv_request_body);
         mTvResponseHeaders = findViewById(R.id.tv_response_headers);
         mTvBody = findViewById(R.id.tv_body);
         mScrollView = findViewById(R.id.scrollView);
@@ -102,6 +106,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
         }
         setCURLContent();
         setRequestHeaders();
+        setRequestBody();
         setResponseHeaders();
         setBody();
     }
@@ -109,13 +114,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
     private void setCURLContent() {
         Map<String, String> map = new LinkedHashMap<>();
         String url = mNetworkFeedModel.getUrl();
-        if (url.length()>40){
-            String substring = url.substring(0, 40);
-            url = substring + "……";
-            map.put("Request URL",url);
-        } else {
-            map.put("Request URL",url);
-        }
+        map.put("Request URL",url);
         map.put("Request Method",mNetworkFeedModel.getMethod());
         int status = mNetworkFeedModel.getStatus();
         if (status==200){
@@ -153,17 +152,29 @@ public class NetworkDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NetInfoUrlDialog dialog = new NetInfoUrlDialog(NetworkDetailActivity.this);
-                String response;
-                if (string.length()>200){
-                    response = string.substring(0, 200);
-                } else {
-                    response = string;
-                }
-                dialog.setData(response);
+                dialog.setData(string);
                 dialog.setTitle("复制请求头数据");
                 dialog.show();
             }
         });
+    }
+
+    private void setRequestBody() {
+        String requestBody  = mNetworkFeedModel.getRequestBody();
+        if(!TextUtils.isEmpty(requestBody)) {
+            mTvRequestBodyTitle.setVisibility(View.VISIBLE);
+            mTvRequestBody.setVisibility(View.VISIBLE);
+            mTvRequestBody.setText(requestBody);
+            mTvRequestBody.setOnClickListener(v -> {
+                NetInfoUrlDialog dialog = new NetInfoUrlDialog(NetworkDetailActivity.this);
+                dialog.setData(requestBody);
+                dialog.setTitle("复制请求数据");
+                dialog.show();
+            });
+        } else {
+            mTvRequestBodyTitle.setVisibility(View.GONE);
+            mTvRequestBody.setVisibility(View.GONE);
+        }
     }
 
     private void setResponseHeaders() {
